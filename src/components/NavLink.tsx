@@ -1,25 +1,25 @@
 import {
     NavLink as RNavLink,
     NavLinkRenderProps,
-    generatePath,
+    To,
+    matchPath,
 } from "react-router-dom";
 
 type Props = {
-    to: string;
+    to: To;
     children: React.ReactNode;
     className?: string | ((props: NavLinkRenderProps) => string | undefined);
-    params?: object;
 };
 
-const NavLink = ({ to, params = {}, className, children, ...rest }: Props) => {
-    to = generatePath(to, params);
-
+const NavLink = ({ to, className, children, ...rest }: Props) => {
     return (
         <RNavLink
             to={to}
             className={(state) =>
                 `${
-                    state.isActive
+                    state.isActive ||
+                    (matchPath({ path: "/page?/:page?" }, location.pathname) &&
+                        to === "/")
                         ? "bg-blue-500 shadow text-gray-100 border-blue-950"
                         : "border-transparent"
                 }
