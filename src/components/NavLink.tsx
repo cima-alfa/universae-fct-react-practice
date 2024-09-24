@@ -1,25 +1,28 @@
 import {
     NavLink as RNavLink,
     NavLinkRenderProps,
-    To,
     matchPath,
 } from "react-router-dom";
+import { routeNames, toLink } from "../routes";
 
 type Props = {
-    to: To;
+    to: string;
     children: React.ReactNode;
     className?: string | ((props: NavLinkRenderProps) => string | undefined);
+    params?: object;
 };
 
-const NavLink = ({ to, className, children, ...rest }: Props) => {
+const NavLink = ({ to, params, className, children, ...rest }: Props) => {
     return (
         <RNavLink
-            to={to}
+            to={toLink(to, params)}
             className={(state) =>
                 `${
                     state.isActive ||
-                    (matchPath({ path: "/page?/:page?" }, location.pathname) &&
-                        to === "/")
+                    matchPath(
+                        { path: routeNames[to as keyof typeof routeNames] },
+                        location.pathname
+                    )
                         ? "bg-blue-500 shadow text-gray-100 border-blue-950"
                         : "border-transparent"
                 }

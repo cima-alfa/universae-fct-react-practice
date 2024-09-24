@@ -1,0 +1,11 @@
+{
+    "auth": [],
+    "posts": [],
+    "users": [
+        {
+            "email": "test@example.com",
+            "password": "$2a$10$LvJzwNDfgZ4wK/ClUi3cuOHEn9obXhx6xbj6nqbOvTHCfs4qzLBwi",
+            "id": 1
+        }
+    ]
+}

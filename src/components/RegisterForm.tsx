@@ -1,10 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
-import { toLink } from "../routes";
+import { Form } from "react-router-dom";
 
-const LoginForm = () => {
-    const navigate = useNavigate();
-
+const RegisterForm = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -16,22 +13,27 @@ const LoginForm = () => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
-        fetch("http://localhost:3000/login", {
+        if (formData.password !== formData.password_confirmation) {
+            setError("Passwords do not match!");
+
+            return;
+        }
+
+        const user = {
+            email: formData.email,
+            password: formData.password,
+        };
+
+        fetch("http://localhost:3000/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(user),
         })
             .then((res) => res.json())
             .then((data) => {
                 if (typeof data !== "object") {
                     setError(data);
-
-                    return;
                 }
-
-                localStorage.setItem("access-token", JSON.stringify(data));
-
-                navigate(toLink("dashboard"));
             });
     };
 
@@ -47,7 +49,7 @@ const LoginForm = () => {
     return (
         <>
             <h1 className="text-4xl text-center mb-10 font-bold">
-                Login to your account
+                Register a new account
             </h1>
 
             <Form
@@ -79,12 +81,25 @@ const LoginForm = () => {
                         onChange={handleChange}
                     />
                 </label>
+                <label>
+                    <div className="font-semibold text-lg mb-2">
+                        Confirm Password
+                    </div>
+                    <input
+                        type="password"
+                        name="password_confirmation"
+                        required
+                        className="w-full rounded"
+                        value={formData.password_confirmation}
+                        onChange={handleChange}
+                    />
+                </label>
                 <button className="px-4 py-2 mt-5 font-semibold rounded bg-blue-400 text-white border-b-2 border-blue-800 hover:border-blue-900 hover:bg-blue-500 active:border-blue-950 active:bg-blue-600 transition-colors">
-                    Login
+                    Register
                 </button>
             </Form>
         </>
     );
 };
 
-export default LoginForm;
+export default RegisterForm;
