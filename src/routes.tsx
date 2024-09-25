@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AuthenticatedRoute from "./components/Routes/AuthenticatedRoute";
 import NotAuthenticatedRoute from "./components/Routes/NotAuthenticatedRoute";
+import Post from "./pages/Post";
 
 type Route = {
     name: string;
@@ -22,7 +23,7 @@ type Route = {
 
 export const routes: Route[] = [
     { name: "home", path: "/page?/:page?", view: Home },
-    { name: "post", path: "/post/:post", view: Home },
+    { name: "post", path: "/post/:post", view: Post },
     { name: "dashboard", path: "/dashboard", view: Dashboard, routeAuth: true },
     { name: "register", path: "/register", view: Register, routeAuth: false },
     { name: "login", path: "/login", view: Login, routeAuth: false },
@@ -70,10 +71,16 @@ export const routeList = createBrowserRouter(
     )
 );
 
-export const toLink = (name: string | string, params = {}) => {
+export const toLink = (name: string | string, params: object = {}) => {
     const _name = name as keyof typeof routeNames;
 
     let target: string = routeNames[_name];
+
+    params = Object.fromEntries(
+        Object.entries(params).filter((x) => {
+            return !!x[1];
+        })
+    );
 
     for (const [key, val] of Object.entries(params)) {
         target = target.replace(new RegExp(":" + key + "\\??"), `${val}`);
