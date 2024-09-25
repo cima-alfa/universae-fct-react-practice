@@ -2,7 +2,7 @@
 
 **To start the project, run the following commands**:
 
-_The `dev` and `db` commands need to be typed in separate terminals_
+(_The `dev` and `db` commands need to be typed in separate terminals_)
 
 -   npm i
 -   npm run dev
@@ -12,7 +12,7 @@ _The `dev` and `db` commands need to be typed in separate terminals_
 
 ## Todo:
 
--   edit and delete posts
+-   Edit and delete posts
 
 &nbsp;
 
