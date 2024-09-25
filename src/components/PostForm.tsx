@@ -8,6 +8,8 @@ const PostForm = () => {
     const navigate = useNavigate();
     const { loggedIn } = useLoggedIn();
 
+    const date = new Date();
+
     const dataTemplate = {
         title: "",
         summary: "",
@@ -24,10 +26,10 @@ const PostForm = () => {
         setMessage(null);
 
         const getLoggedIn = auth();
-        const date = new Date();
+
         const data = {
             ...formData,
-            createdOn: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+            createdOn: date.getTime(),
             user: getLoggedIn?.user.email,
         };
 
@@ -135,7 +137,7 @@ const PostForm = () => {
                                 (_title = formData.title).trim() === ""
                                     ? "Post Title"
                                     : _title,
-                            createdOn: `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
+                            createdOn: date.getTime(),
                             user: loggedIn?.user.email,
                             id: "mockup",
                             content:

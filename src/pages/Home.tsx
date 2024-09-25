@@ -23,11 +23,29 @@ const Home = () => {
     }, [page, navigate]);
 
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         fetch("http://localhost:3000/posts")
             .then((res) => res.json())
-            .then((data) => setPosts(data));
+            .then((data) => {
+                data.sort(
+                    (
+                        a: { createdOn: number; id: number },
+                        b: { createdOn: number; id: number }
+                    ) => {
+                        return b.createdOn - a.createdOn;
+                    }
+                );
+
+                setLoading(false);
+                setPosts(data);
+            })
+            .catch((error) => {
+                setLoading(false);
+                setError(error.message);
+            });
     }, []);
 
     return (
@@ -44,7 +62,25 @@ const Home = () => {
                         <PostItem post={post} key={id} showSummary={true} />
                     ))
                 ) : (
-                    <PostItem />
+                    <>
+                        {!error && (
+                            <>
+                                {loading ? (
+                                    <div className="text-2xl text-center font-bold">
+                                        Loading...
+                                    </div>
+                                ) : (
+                                    <PostItem />
+                                )}
+                            </>
+                        )}
+
+                        {error && (
+                            <div className="text-2xl text-center font-bold text-red-800">
+                                Could not load posts
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </>

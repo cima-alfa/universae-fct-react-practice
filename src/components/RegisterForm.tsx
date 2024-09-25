@@ -51,6 +51,9 @@ const RegisterForm = () => {
                     replace: true,
                     state: { dashboardMessage: "Registration successful!" },
                 });
+            })
+            .catch(() => {
+                setError("Something went wrong, try again later.");
             });
     };
 

@@ -36,6 +36,9 @@ const LoginForm = () => {
                 setLoggedIn(auth());
 
                 navigate(toLink("dashboard"), { replace: true });
+            })
+            .catch(() => {
+                setError("Something went wrong, try again later.");
             });
     };
 

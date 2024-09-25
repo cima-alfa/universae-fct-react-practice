@@ -30,6 +30,10 @@ const AuthenticatedRoute = ({
                         return;
                     }
                 }
+            })
+            .catch(() => {
+                localStorage.removeItem("access-token");
+                setAuthenticated(null);
             });
     }, [authenticated]);
 

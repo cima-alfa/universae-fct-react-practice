@@ -4,7 +4,7 @@ import Markdown from "react-markdown";
 
 type Post = {
     title?: string;
-    createdOn?: string;
+    createdOn?: number;
     user?: string;
     id?: string | number;
     summary?: string;
@@ -19,14 +19,17 @@ const PostItem = ({
     showSummary?: boolean;
 }) => {
     if (post) {
+        const date = new Date(post.createdOn as number);
+
         return (
             <div className="bg-orange-100 px-5 py-3 rounded-lg shadow flex-grow">
                 <h2 className="text-2xl font-black mb-1">{post.title}</h2>
 
                 <div>
                     <small className="text-sm font-serif text-gray-600">
-                        Created on <strong>{post.createdOn}</strong> by{" "}
-                        <strong>{post.user}</strong>
+                        Created on{" "}
+                        <strong>{`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</strong>{" "}
+                        by <strong>{post.user}</strong>
                     </small>
                 </div>
 
