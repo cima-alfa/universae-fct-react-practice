@@ -4,9 +4,17 @@
 -   npm run dev
 -   npm run db
 
+---
+
+---
+
+---
+
 ## Todo:
 
 -   edit and delete posts
+
+---
 
 ---
 
