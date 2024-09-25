@@ -12,11 +12,14 @@ const LoginForm = () => {
     });
 
     const [error, setError] = useState<string | null>(null);
+    const [processing, setProcessing] = useState(false);
 
     const navigate = useNavigate();
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+
+        setProcessing(true);
 
         fetch("http://localhost:3000/login", {
             method: "POST",
@@ -25,6 +28,8 @@ const LoginForm = () => {
         })
             .then((res) => res.json())
             .then((data) => {
+                setProcessing(false);
+
                 if (typeof data !== "object") {
                     setError(data);
 
@@ -38,6 +43,7 @@ const LoginForm = () => {
                 navigate(toLink("dashboard"), { replace: true });
             })
             .catch(() => {
+                setProcessing(false);
                 setError("Something went wrong, try again later.");
             });
     };
@@ -61,6 +67,12 @@ const LoginForm = () => {
                 className="grid gap-y-4 sm:max-w-lg w-full bg-gray-200 py-5 px-10 mx-auto rounded-lg shadow"
                 onSubmit={handleSubmit}
             >
+                {processing && (
+                    <p className="mb-1 font-bold text-sky-800">
+                        Logging you in...
+                    </p>
+                )}
+
                 {error && (
                     <p className="mb-1 font-bold text-red-800">{error}</p>
                 )}
