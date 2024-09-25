@@ -26,7 +26,7 @@ const NavLink = ({ to, params, className, children, ...rest }: Props) => {
                         ? "bg-blue-500 shadow text-gray-100 border-blue-950"
                         : "border-transparent"
                 }
-                px-3 py-2 rounded border-b-2 hover:bg-blue-500 hover:border-blue-950 hover:text-gray-50 transition-colors
+                grid leading-none px-3 py-3 rounded border-b-2 hover:bg-blue-500 hover:border-blue-950 hover:text-gray-50 transition-colors
                 ${
                     typeof className === "function"
                         ? className(state)

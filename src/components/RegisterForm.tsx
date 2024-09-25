@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
+import { auth, useLoggedIn } from "../auth";
+import { toLink } from "../routes";
 
 const RegisterForm = () => {
+    const { setLoggedIn } = useLoggedIn();
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -9,6 +13,8 @@ const RegisterForm = () => {
     });
 
     const [error, setError] = useState<string | null>(null);
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -34,6 +40,15 @@ const RegisterForm = () => {
                 if (typeof data !== "object") {
                     setError(data);
                 }
+
+                localStorage.setItem("access-token", JSON.stringify(data));
+
+                setLoggedIn(auth());
+
+                navigate(toLink("dashboard"), {
+                    replace: true,
+                    state: { dashboardMessage: "Registration successful!" },
+                });
             });
     };
 

@@ -39,9 +39,11 @@ const Home = () => {
                 } gap-x-8 gap-y-10`}
             >
                 {Object.keys(posts).length !== 0 ? (
-                    posts.map((post, id) => <PostItem post={post} key={id} />)
+                    posts.map((post, id) => (
+                        <PostItem post={post} key={id} showSummary={true} />
+                    ))
                 ) : (
-                    <PostItem post={{ noneFound: true }} />
+                    <PostItem />
                 )}
             </div>
         </>

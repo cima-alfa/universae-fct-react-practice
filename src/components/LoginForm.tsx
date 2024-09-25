@@ -1,17 +1,19 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
+import { auth, useLoggedIn } from "../auth";
 import { toLink } from "../routes";
 
 const LoginForm = () => {
-    const navigate = useNavigate();
+    const { setLoggedIn } = useLoggedIn();
 
     const [formData, setFormData] = useState({
         email: "",
         password: "",
-        password_confirmation: "",
     });
 
     const [error, setError] = useState<string | null>(null);
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -31,7 +33,9 @@ const LoginForm = () => {
 
                 localStorage.setItem("access-token", JSON.stringify(data));
 
-                navigate(toLink("dashboard"));
+                setLoggedIn(auth());
+
+                navigate(toLink("dashboard"), { replace: true });
             });
     };
 
