@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import PostItem from "../components/PostItem";
 import { useEffect, useState } from "react";
+import { toLink } from "../routes";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -15,9 +16,9 @@ const Home = () => {
 
         if (
             (pageNumber === 0 || pageNumber.toString() !== page) &&
-            location.pathname !== "/"
+            location.pathname !== toLink("home")
         ) {
-            navigate("/");
+            navigate(toLink("home"));
         }
     }, [page, navigate]);
 
