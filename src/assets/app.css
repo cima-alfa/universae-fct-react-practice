@@ -87,5 +87,14 @@
                 @apply mb-4;
             }
         }
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+
+            &:hover {
+                text-decoration-thickness: 2px;
+            }
+        }
     }
 }
