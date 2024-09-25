@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc -b && vite build",
-        "db": "json-server ./src/db/blog.json -w -m ./node_modules/json-server-auth -r ./src/db/routes.json",
+        "db": "json-server ./src/db/blog.json -w -m ./node_modules/json-server-auth -r ./src/db/routes.json -d 1000",
         "lint": "eslint .",
         "preview": "vite preview"
     },
