@@ -10,7 +10,7 @@
 
 ### Post example:
 
-#### Title:
+#### **Title:**
 
 Entrada 1
 
