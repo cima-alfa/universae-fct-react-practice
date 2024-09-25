@@ -2,11 +2,11 @@
 
 **To start the project, run the following commands**:
 
-(_The `dev` and `db` commands need to be typed in separate terminals_)
+(_The `db` and `dev` commands need to be typed in separate terminals_)
 
 -   npm i
--   npm run dev
 -   npm run db
+-   npm run dev
 
 &nbsp;
 
