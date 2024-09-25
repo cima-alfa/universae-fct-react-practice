@@ -37,7 +37,7 @@ Lorem ipsum, dolor sit amet *consectetur adipisicing* elit. Vero **cupiditate at
 
 > Source: [Markdown](https://www.markdownguide.org/basic-syntax/#images-1)
 
-___
+---
 
 [GitHub Repo](https://github.com/cima-alfa/universae-fct-react-practice)
 ```
