@@ -14,15 +14,17 @@
 
 ### Post example:
 
+---
+
 #### Title:
 
-Entrada 1
+`Entrada 1`
 
 ---
 
 #### Summary:
 
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero cupiditate at ullam assumenda, ratione molestiae dolores laboriosam architecto iusto ea officiis nemo sint facere corporis.
+`Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero cupiditate at ullam assumenda, ratione molestiae dolores laboriosam architecto iusto ea officiis nemo sint facere corporis.`
 
 ---
 
