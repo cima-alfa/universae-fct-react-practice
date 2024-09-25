@@ -39,6 +39,8 @@ const RegisterForm = () => {
             .then((data) => {
                 if (typeof data !== "object") {
                     setError(data);
+
+                    return;
                 }
 
                 localStorage.setItem("access-token", JSON.stringify(data));
