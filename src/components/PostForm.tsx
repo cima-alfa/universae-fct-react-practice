@@ -50,6 +50,8 @@ const PostForm = () => {
                 }
 
                 setMessage("Post created!");
+
+                setFormData(dataTemplate);
             });
     };
 
