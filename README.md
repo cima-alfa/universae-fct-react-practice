@@ -1,18 +1,18 @@
 # Blog Posts React Practice
 
+**To start the project, run the following commands**:
+
+_The `dev` and `db` commands need to be typed in separate terminals_
+
 -   npm i
 -   npm run dev
 -   npm run db
 
 &nbsp;
 
-&nbsp;
-
 ## Todo:
 
 -   edit and delete posts
-
-&nbsp;
 
 &nbsp;
 
@@ -24,7 +24,7 @@
 Entrada 1
 ```
 
-&nbsp;
+---
 
 #### Summary:
 
@@ -32,7 +32,7 @@ Entrada 1
 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero cupiditate at ullam assumenda, ratione molestiae dolores laboriosam architecto iusto ea officiis nemo sint facere corporis.
 ```
 
-&nbsp;
+---
 
 #### Text:
 
