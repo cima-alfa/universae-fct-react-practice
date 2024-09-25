@@ -91,5 +91,5 @@ export const toLink = (name: string | string, params = {}) => {
 
     target = removeUnusedSegments(target).replace("?", "");
 
-    return target;
+    return target === "" ? "/" : target;
 };
