@@ -5,6 +5,7 @@ import NavMenu from "../components/NavMenu";
 
 const MainLayout = () => {
     const [loggedIn, setLoggedIn] = useState<LoggedIn>(auth());
+    const [refresh, setRefresh] = useState<boolean>(false);
 
     return (
         <div className="grid grid-rows-[auto_1fr_auto] min-h-[calc(100dvh-(1.25rem*2))] w-full max-w-screen-lg mx-auto bg-gray-100 rounded-lg shadow-md">
@@ -22,9 +23,13 @@ const MainLayout = () => {
                         {
                             loggedIn: loggedIn,
                             setLoggedIn: setLoggedIn,
+                            refresh: refresh,
+                            setRefresh: setRefresh,
                         } satisfies {
                             loggedIn: LoggedIn;
                             setLoggedIn: typeof setLoggedIn;
+                            refresh: boolean;
+                            setRefresh: typeof setRefresh;
                         }
                     }
                 />

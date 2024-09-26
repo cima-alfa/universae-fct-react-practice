@@ -1,22 +1,60 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import PostItem from "./PostItem";
 import { auth, useLoggedIn } from "../auth";
 import { toLink } from "../routes";
+import { useRefresh } from "../hooks";
 
 const PostForm = () => {
     const navigate = useNavigate();
     const { loggedIn } = useLoggedIn();
+    const { refresh, setRefresh } = useRefresh();
+    const { postId: editPost } = useParams();
+
+    const dataTemplate = useMemo(
+        () => ({
+            title: "",
+            summary: "",
+            content: "",
+        }),
+        []
+    );
+
+    const [formData, setFormData] = useState(dataTemplate);
 
     const date = new Date();
 
-    const dataTemplate = {
-        title: "",
-        summary: "",
-        content: "",
-    };
+    useEffect(() => {
+        setFormData(dataTemplate);
 
-    const [formData, setFormData] = useState(dataTemplate);
+        if (editPost) {
+            fetch(`http://localhost:3000/posts/${editPost}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (
+                        typeof data !== "object" ||
+                        Object.entries(data).length <= 1
+                    ) {
+                        navigate(toLink("dashboard"), {
+                            replace: true,
+                        });
+
+                        return;
+                    }
+
+                    setFormData({
+                        title: data.title,
+                        summary: data.summary,
+                        content: data.content,
+                    });
+                })
+                .catch(() => {
+                    navigate(toLink("dashboard"), {
+                        replace: true,
+                    });
+                });
+        }
+    }, [editPost, navigate, refresh, dataTemplate]);
 
     const [message, setMessage] = useState<string | null>(null);
 
@@ -27,14 +65,16 @@ const PostForm = () => {
 
         const getLoggedIn = auth();
 
-        const data = {
-            ...formData,
-            createdOn: date.getTime(),
-            user: getLoggedIn?.user.email,
-        };
+        const data = editPost
+            ? formData
+            : {
+                  ...formData,
+                  createdOn: new Date().getTime(),
+                  user: getLoggedIn?.user.email,
+              };
 
-        fetch("http://localhost:3000/posts", {
-            method: "POST",
+        fetch(`http://localhost:3000/posts${editPost ? `/${editPost}` : ""}`, {
+            method: editPost ? "PATCH" : "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + getLoggedIn?.accessToken,
@@ -51,10 +91,14 @@ const PostForm = () => {
                     return;
                 }
 
-                setMessage("Post created!");
+                setMessage(editPost ? "Post edited!" : "Post created!");
+                setRefresh(true);
 
-                setFormData(dataTemplate);
-            });
+                if (!editPost) {
+                    setFormData(dataTemplate);
+                }
+            })
+            .catch(() => {});
     };
 
     const handleChange = (e: ChangeEvent) => {
@@ -73,10 +117,13 @@ const PostForm = () => {
         <>
             <div className="grid grid-cols-2 gap-5">
                 <div>
-                    <h2 className="text-2xl mb-6 font-bold">Create Post</h2>
+                    <h2 className="text-2xl mb-6 font-bold">
+                        {editPost === undefined ? "Create Post" : "Edit Post"}
+                    </h2>
                     <Form
                         className="grid gap-y-4 bg-gray-200 p-5 rounded-lg shadow"
                         onSubmit={handleSubmit}
+                        id="post-form"
                     >
                         {message && (
                             <p className="mb-1 font-bold text-green-800">
@@ -125,7 +172,7 @@ const PostForm = () => {
                         </label>
 
                         <button className="px-4 py-2 mt-5 font-semibold rounded bg-blue-400 text-white border-b-2 border-blue-800 hover:border-blue-900 hover:bg-blue-500 active:border-blue-950 active:bg-blue-600 transition-colors">
-                            Create
+                            {editPost ? "Edit" : "Create"}
                         </button>
                     </Form>
                 </div>

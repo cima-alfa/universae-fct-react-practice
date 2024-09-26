@@ -14,7 +14,11 @@ const NavMenu = ({
 }) => {
     const navigate = useNavigate();
 
-    const logout = () => {
+    const handleLogout = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        e.preventDefault();
+
         localStorage.removeItem("access-token");
 
         setLoggedIn(auth());
@@ -41,7 +45,7 @@ const NavMenu = ({
                         </li>
                         <li className="grid">
                             <button
-                                onClick={logout}
+                                onClick={handleLogout}
                                 className="grid leading-none px-3 py-3 rounded border-b-2 border-transparent hover:border-orange-700 hover:bg-orange-400 hover:text-white transition-colors"
                             >
                                 Logout

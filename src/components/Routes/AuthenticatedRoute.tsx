@@ -31,10 +31,7 @@ const AuthenticatedRoute = ({
                     }
                 }
             })
-            .catch(() => {
-                localStorage.removeItem("access-token");
-                setAuthenticated(null);
-            });
+            .catch(() => {});
     }, [authenticated]);
 
     return authenticated ? (

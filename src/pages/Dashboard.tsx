@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import PostForm from "../components/PostForm";
+import PostCollection from "../components/PostCollection";
+import { auth } from "../auth";
 
 const Dashboard = () => {
     const location = useLocation();
@@ -15,6 +17,19 @@ const Dashboard = () => {
             )}
 
             <PostForm />
+
+            <h2
+                className="text-4xl text-center my-10 font-bold"
+                id="post-collection"
+            >
+                Your Posts
+            </h2>
+
+            <PostCollection
+                to="dashboard"
+                byUser={auth()?.user.email}
+                userFunctions={true}
+            />
         </>
     );
 };
