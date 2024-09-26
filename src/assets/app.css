@@ -54,7 +54,7 @@
         }
 
         ul {
-            @apply pl-4;
+            @apply list-inside;
 
             list-style-type: square;
 
@@ -67,7 +67,7 @@
             }
 
             ul {
-                @apply mb-0;
+                @apply mb-0 pl-6;
             }
         }
 
