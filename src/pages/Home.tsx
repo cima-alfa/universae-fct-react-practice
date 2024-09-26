@@ -10,7 +10,7 @@ const Home = () => {
                 Blog Posts
             </h1>
 
-            <PostCollection to="home" urlPagination={true} />
+            <PostCollection to="home" urlPagination="home-paginated" />
         </>
     );
 };

@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import AuthenticatedRoute from "./components/Routes/AuthenticatedRoute";
 import NotAuthenticatedRoute from "./components/Routes/NotAuthenticatedRoute";
 import Post from "./pages/Post";
+import NotFound from "./pages/NotFound";
 
 type Route = {
     name: string;
@@ -22,7 +23,8 @@ type Route = {
 };
 
 export const routes: Route[] = [
-    { name: "home", path: "/page?/:page?", view: Home },
+    { name: "home", path: "/", view: Home },
+    { name: "home-paginated", path: "/page/:page?", view: Home },
     { name: "post", path: "/post/:postId", view: Post },
     {
         name: "dashboard",
@@ -55,6 +57,7 @@ const wrapNotAuthenticatedRoute = (element: React.ReactNode) => {
 export const routeList = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<MainLayout />}>
+            <Route path="*" element={<NotFound />} />
             {routes.map((route) => (
                 <Route
                     key={route.name}

@@ -6,7 +6,7 @@ import { useRefresh } from "../hooks";
 
 type PostCollection = {
     to: string;
-    urlPagination?: boolean;
+    urlPagination?: false | string;
     userFunctions?: boolean;
     byUser?: string;
 };
@@ -205,7 +205,7 @@ const PostCollection = ({
                                     {urlPagination ? (
                                         <Link
                                             onClick={() => setPaginated(true)}
-                                            to={toLink(to, {
+                                            to={toLink(urlPagination, {
                                                 page: n <= 1 ? null : n,
                                             })}
                                             className={`grid place-items-center p-1 rounded-full  w-8 h-8 border-b-2 hover:border-orange-700 hover:bg-orange-400 active:border-orange-800 active:bg-orange-500 transition-colors hover:text-white active:text-white  ${
