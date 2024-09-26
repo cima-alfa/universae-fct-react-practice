@@ -23,7 +23,7 @@ type Route = {
 
 export const routes: Route[] = [
     { name: "home", path: "/page?/:page?", view: Home },
-    { name: "post", path: "/post/:post", view: Post },
+    { name: "post", path: "/post/:postId", view: Post },
     { name: "dashboard", path: "/dashboard", view: Dashboard, routeAuth: true },
     { name: "register", path: "/register", view: Register, routeAuth: false },
     { name: "login", path: "/login", view: Login, routeAuth: false },
