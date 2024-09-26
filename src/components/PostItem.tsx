@@ -93,13 +93,15 @@ const PostItem = ({
                     </>
                 )}
 
-                <div>
-                    <small className="text-sm font-serif text-gray-600">
-                        Created on{" "}
-                        <strong>{`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</strong>{" "}
-                        by <strong>{post.user}</strong>
-                    </small>
-                </div>
+                {post.id !== "notfound" && (
+                    <div>
+                        <small className="text-sm font-serif text-gray-600">
+                            Created on{" "}
+                            <strong>{`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</strong>{" "}
+                            by <strong>{post.user}</strong>
+                        </small>
+                    </div>
+                )}
 
                 <div className="post-content">
                     {showSummary ? post.summary : content}

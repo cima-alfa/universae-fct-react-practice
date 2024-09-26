@@ -183,53 +183,54 @@ const PostCollection = ({
                     ))
                 ) : (
                     <>
-                        {!error && <PostItem />}
+                        {!error && (
+                            <div className="col-span-2">
+                                <PostItem />
+                            </div>
+                        )}
 
                         {error && (
-                            <div className="text-2xl text-center font-bold text-red-800 md:col-span-2">
+                            <div className="text-2xl text-center font-bold text-red-800 col-span-2">
                                 Could not load posts
                             </div>
                         )}
                     </>
                 )}
 
-                {!error && (
-                    <div className="md:col-span-2">
+                {!error && pages > 1 && (
+                    <div className="col-span-2">
                         <ul className="flex flex-wrap gap-3 justify-center">
-                            {pages > 1 &&
-                                pageNumbers.map((n) => (
-                                    <li key={n}>
-                                        {urlPagination ? (
-                                            <Link
-                                                onClick={() =>
-                                                    setPaginated(true)
-                                                }
-                                                to={toLink(to, {
-                                                    page: n <= 1 ? null : n,
-                                                })}
-                                                className={`grid place-items-center p-1 rounded-full  w-8 h-8 border-b-2 hover:border-orange-700 hover:bg-orange-400 active:border-orange-800 active:bg-orange-500 transition-colors hover:text-white active:text-white  ${
-                                                    pageNumber === n
-                                                        ? "font-bold bg-orange-300 border-orange-600 text-orange-950 "
-                                                        : "bg-gray-300 border-gray-600"
-                                                }`}
-                                            >
-                                                {n}
-                                            </Link>
-                                        ) : (
-                                            <button
-                                                onClick={handlePaginate}
-                                                data-page={n}
-                                                className={`grid place-items-center p-1 rounded-full  w-8 h-8 border-b-2 hover:border-orange-700 hover:bg-orange-400 active:border-orange-800 active:bg-orange-500 transition-colors hover:text-white active:text-white  ${
-                                                    pageNumber === n
-                                                        ? "font-bold bg-orange-300 border-orange-600 text-orange-950 "
-                                                        : "bg-gray-300 border-gray-600"
-                                                }`}
-                                            >
-                                                {n}
-                                            </button>
-                                        )}
-                                    </li>
-                                ))}
+                            {pageNumbers.map((n) => (
+                                <li key={n}>
+                                    {urlPagination ? (
+                                        <Link
+                                            onClick={() => setPaginated(true)}
+                                            to={toLink(to, {
+                                                page: n <= 1 ? null : n,
+                                            })}
+                                            className={`grid place-items-center p-1 rounded-full  w-8 h-8 border-b-2 hover:border-orange-700 hover:bg-orange-400 active:border-orange-800 active:bg-orange-500 transition-colors hover:text-white active:text-white  ${
+                                                pageNumber === n
+                                                    ? "font-bold bg-orange-300 border-orange-600 text-orange-950 "
+                                                    : "bg-gray-300 border-gray-600"
+                                            }`}
+                                        >
+                                            {n}
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            onClick={handlePaginate}
+                                            data-page={n}
+                                            className={`grid place-items-center p-1 rounded-full  w-8 h-8 border-b-2 hover:border-orange-700 hover:bg-orange-400 active:border-orange-800 active:bg-orange-500 transition-colors hover:text-white active:text-white  ${
+                                                pageNumber === n
+                                                    ? "font-bold bg-orange-300 border-orange-600 text-orange-950 "
+                                                    : "bg-gray-300 border-gray-600"
+                                            }`}
+                                        >
+                                            {n}
+                                        </button>
+                                    )}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 )}
