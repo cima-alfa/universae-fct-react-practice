@@ -14,16 +14,57 @@ type Post = {
 const PostItem = ({
     post,
     showSummary = false,
+    readButton = true,
+    h1 = false,
 }: {
     post?: Post;
     showSummary?: boolean;
+    readButton?: boolean;
+    h1?: boolean;
 }) => {
     if (post) {
         const date = new Date(post.createdOn as number);
+        const content = (
+            <Markdown
+                components={{
+                    a: ({ children, href, title }) => {
+                        return (
+                            <a
+                                children={children}
+                                href={href}
+                                title={title}
+                                target="_blank"
+                                rel={
+                                    href &&
+                                    new URL(href, location.origin).origin ===
+                                        location.origin
+                                        ? undefined
+                                        : "nofollow"
+                                }
+                            />
+                        );
+                    },
+                }}
+            >
+                {post.content}
+            </Markdown>
+        );
 
         return (
             <div className="bg-orange-100 px-5 py-3 rounded-lg shadow flex-grow">
-                <h2 className="text-2xl font-black mb-1">{post.title}</h2>
+                {post.title && (
+                    <>
+                        {h1 ? (
+                            <h1 className="text-4xl font-black mb-4 text-balance">
+                                {post.title}
+                            </h1>
+                        ) : (
+                            <h2 className="text-2xl font-black mb-2 text-balance">
+                                {post.title}
+                            </h2>
+                        )}
+                    </>
+                )}
 
                 <div>
                     <small className="text-sm font-serif text-gray-600">
@@ -34,16 +75,12 @@ const PostItem = ({
                 </div>
 
                 <div className="post-content">
-                    {showSummary ? (
-                        post.summary
-                    ) : (
-                        <Markdown>{post.content}</Markdown>
-                    )}
+                    {showSummary ? post.summary : content}
                 </div>
 
-                {post.id !== "mockup" && (
+                {post.id !== "mockup" && readButton && (
                     <Link
-                        to={toLink("post", { post: post.id })}
+                        to={toLink("post", { postId: post.id })}
                         className="inline-block px-4 py-2 mt-5 font-semibold rounded bg-orange-300 text-orange-950 hover:text-white active:text-white border-b-2 border-orange-600 hover:border-orange-700 hover:bg-orange-400 active:border-orange-800 active:bg-orange-500 transition-colors"
                     >
                         Read Post
