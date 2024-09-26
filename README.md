@@ -4,6 +4,7 @@
 
 (_The `db` and `dev` commands need to be typed in separate terminals_)
 
+-   Copy the _blog.json.example_ file in the `/src/db` directory and rename it to _blog.json_
 -   `npm i`
 -   `npm run db`
     -   For loading simulation use: `npm run db -- -d 1000`
