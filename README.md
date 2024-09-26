@@ -4,9 +4,10 @@
 
 (_The `db` and `dev` commands need to be typed in separate terminals_)
 
--   npm i
--   npm run db
--   npm run dev
+-   `npm i`
+-   `npm run db`
+-   For loading simulation use: `npm run db -- -d 1000`
+-   `npm run dev`
 
 &nbsp;
 
@@ -21,7 +22,7 @@
 #### Title:
 
 ```
-Entrada 1
+Quisquam quidem soluta aperiam vero in
 ```
 
 ---
@@ -37,7 +38,7 @@ Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero cupiditate at ull
 #### Text:
 
 ```
-### Titulo
+### Est modi nisi cumque commodi
 
 Lorem ipsum, dolor sit amet *consectetur adipisicing* elit. Vero **cupiditate at ullam** assumenda, ratione molestiae dolores laboriosam architecto iusto ea officiis nemo sint facere corporis. **Quisquam quidem soluta** aperiam vero in, alias expedita doloremque modi molestias hic magni consectetur ratione *reprehenderit* quos minus delectus, quaerat praesentium suscipit? Ab, cum autem!
 
