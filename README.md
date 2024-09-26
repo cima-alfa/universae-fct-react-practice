@@ -6,7 +6,7 @@
 
 -   `npm i`
 -   `npm run db`
--   For loading simulation use: `npm run db -- -d 1000`
+    -   For loading simulation use: `npm run db -- -d 1000`
 -   `npm run dev`
 
 &nbsp;
