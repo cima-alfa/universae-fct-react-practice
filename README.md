@@ -12,12 +12,6 @@
 
 &nbsp;
 
-## Todo:
-
--   Edit and delete posts
-
-&nbsp;
-
 ## Post example:
 
 #### Title:
