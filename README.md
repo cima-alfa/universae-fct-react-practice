@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cima-alfa/universae-fct-react-practice)
+
 # Blog Posts React Practice
 
 **To start the project, run the following commands**:
